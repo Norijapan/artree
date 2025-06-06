@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tree AR</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/jeromeetienne/ar.js/2.2.1/aframe/build/aframe-ar.min.js"></script>
+  </head>
+  <body style="margin: 0; overflow: hidden;">
+    <a-scene embedded arjs>
+      
+      <!-- 木の画像表示 -->
+      <a-plane id="tree"
+               src="tree.png"
+               position="0 0 -2"
+               height="2"
+               width="1.2"
+               material="emissive: green; emissiveIntensity: 0; transparent: true; opacity: 1;">
+      </a-plane>
+
+      <a-entity camera></a-entity>
+
+      <!-- タップ時のスクリプト -->
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const tree = document.querySelector("#tree");
+          tree.addEventListener("click", () => {
+            // 光らせる処理
+            tree.setAttribute("material", {
+              emissive: "yellow",
+              emissiveIntensity: 1
+            });
+
+            // 1秒後に元に戻す
+            setTimeout(() => {
+              tree.setAttribute("material", {
+                emissive: "green",
+                emissiveIntensity: 0
+              });
+            }, 1000);
+          });
+        });
+      </script>
+    </a-scene>
+  </body>
+</html>
